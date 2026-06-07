@@ -1,70 +1,84 @@
 # Deep-Learning-046211
 
-This repository contains coursework and a project from the Deep Learning course (046211). It collects the assignments (HW0–HW3) and a larger project exploring trajectory prediction using Lyft data and L5Kit.
+This repository contains coursework and project files from the Deep Learning course (046211). It includes assignments (HW0–HW3) and a final project exploring multi-agent trajectory prediction using Lyft data, L5Kit, CNNs, and Vision Transformers (ViTs).
 
 ## Repository Structure
 
-- `HW0/` — Machine Learning Basics Refresher
-	- `cancer_dataset.csv` — dataset used in HW0
-	- `ece046211_hw0_205764517_316155944.ipynb`
-- `HW1/` — Optimization and Automatic Differentiation
-	- `ece046211_hw1_205764517_316155944.ipynb`
-- `HW2/` — Multilayer NNs and Convolutional NNs
-	- `ece046211_hw2_205764517_316155944.ipynb`
-- `HW3/` — Sequential Tasks and Training Methods
-	- `ece046211_hw3_seq_tasks_students_205764517_316155944.ipynb`
-	- `data/datasets/WikiText2/wikitext-2/` — WikiText-2 splits: `wiki.train.tokens`, `wiki.valid.tokens`, `wiki.test.tokens`
-- `Project/` - Course Project: Motion Prediction for Autonomous Vehicles - Lyft Level 5 Benchmark
-	- `LyftTrajectoryPrediction/`
-		- `full_pipeline.ipynb` — end-to-end experiment notebook
-		- `README.md` — project-specific notes and usage (read first)
-		- `requirements.txt` — Python dependencies for the project
-		- `assets/` — visualizations, figures, and helper files
-		- `data/` — expected location for raw and preprocessed project data
-		- `l5kit/` — a vendored or local copy of L5Kit utilities (if present)
-		- `models/`
-			- `BaselineRes50Model.py` - Baseline ResNet-50 Model Class
-			- `ViTDeitModel.py` - Data-efficient Image Transformer (DeiT) Model Class
-			- `ViTModel.py` - Visual Transformer (ViT) Model Class
-			- `configs/` — YAML model configuration files
-		- `src/`
-			- `trainer.py` — training loop and orchestration
-			- `utils.py` — utilities for data, metrics and helpers
+* `HW0/` — Machine Learning Basics Refresher
+    * `cancer_dataset.csv` — Dataset used in HW0
+    * `ece046211_hw0.ipynb`
+
+
+* `HW1/` — Optimization and Automatic Differentiation
+    * `ece046211_hw1.ipynb`
+
+
+* `HW2/` — Multilayer NNs and Convolutional NNs
+    * `ece046211_hw2.ipynb`
+
+
+* `HW3/` — Sequential Tasks and Training Methods
+    * `ece046211_hw3_seq_tasks.ipynb`
+    * `data/datasets/WikiText2/wikitext-2/` — WikiText-2 splits: `wiki.train.tokens`, `wiki.valid.tokens`, `wiki.test.tokens`
+
+
+* `Project/` — Course Project: Motion Prediction for Autonomous Vehicles (Lyft Level 5 Benchmark)
+    * `LyftTrajectoryPrediction/`
+        * `full_pipeline.ipynb` — End-to-end experiment notebook
+        * `README.md` — Project-specific notes and usage guidelines
+        * `requirements.txt` — Python dependencies for the project
+        * `assets/` — Visualizations, figures, and helper files
+        * `data/` — Expected location for raw and preprocessed project data
+        * `l5kit/` — Local copy of L5Kit utilities
+        * `models/`
+            * `BaselineRes50Model.py` — Baseline ResNet-50 model class
+            * `ViTDeitModel.py` — Data-efficient Image Transformer (DeiT) model class
+            * `ViTModel.py` — Vision Transformer (ViT) model class
+            * `configs/` — YAML model configuration files
+
+
+        * `src/`
+            * `trainer.py` — Training loop and orchestration
+            * `utils.py` — Utilities for data processing, metrics, and helper functions
+
+
+
+
+
+
+
+---
 
 ## Homeworks Overview
 
-- `HW0` — Machine Learning Basics Refresher: exploratory data analysis and simple supervised learning on `cancer_dataset.csv`, covering basic metrics and model evaluation.
-- `HW1` — Optimization and Automatic Differentiation: exercises in gradient computation, implementing optimization algorithms, and inspecting convergence behavior.
-- `HW2` — Multilayer and Convolutional Neural Networks: building, training, and evaluating MLP and CNN architectures; covers regularization, data augmentation, and basic model design choices.
-- `HW3` — Sequential Tasks and Language Modeling: sequence modelling experiments (RNN/LSTM/Transformer variants) using datasets like WikiText-2; focuses on next-token prediction, loss evaluation, and qualitative text generation.
+* **HW0 — Machine Learning Basics Refresher:** Exploratory data analysis (EDA) and simple supervised learning on `cancer_dataset.csv`, covering basic performance metrics and model evaluation.
+* **HW1 — Optimization and Automatic Differentiation:** Hand-rolled gradient computation, implementation of optimization algorithms, and inspection of training convergence behavior.
+* **HW2 — Multilayer and Convolutional Neural Networks:** Building, training, and evaluating MLP and CNN architectures. Explores regularization techniques, data augmentation, and core model design choices.
+* **HW3 — Sequential Tasks and Language Modeling:** Sequence modeling experiments using Recurrent Neural Network (RNN), Long Short-Term Memory (LSTM), and Transformer variants on the WikiText-2 dataset. Focuses on next-token prediction, loss evaluation, and qualitative text generation.
+
+---
 
 ## Project: Lyft Trajectory Prediction
 
-The `LyftTrajectoryPrediction` project contains model implementations and a training pipeline aimed at forecasting agent trajectories using rasterized inputs and compares several deep learning architectures, starting with a ResNet-50 baseline and more advanced Transformer-based models like Vision Transformer (ViT) and Data-efficient Image Transformer (DeiT).
+The `LyftTrajectoryPrediction` project focuses on forecasting autonomous vehicle agent trajectories using rasterized inputs. The core task is to model multi-agent future positions by leveraging semantic bird's-eye-view (BEV) map representations.
 
-- `full_pipeline.ipynb` demonstrates data loading, model instantiation, training, and visualization for quick experiments.
-- `models/` contains the model classes used by the notebooks and training scripts.
-- `src/trainer.py` provides a reusable training loop; inspect or adapt it to run experiments from the command line or scripts.
+This project implements and evaluates several deep learning architectures to compare traditional inductive biases against attention-based methods:
 
-If you use L5Kit, follow their installation and dataset preparation steps (see `Project/LyftTrajectoryPrediction/README.md` if present).
+* **Task:** Predicting multi-agent future trajectories from rasterized bird's-eye-view (BEV) inputs over a fixed time horizon.
+* **CNN Baseline:** A convolutional baseline utilizing **ResNet-50** to extract spatial features from the scene rasters.
+* **Attention-Based Models:** Implementing and adapting **Vision Transformers (ViT)** and **Data-efficient Image Transformers (DeiT)** to process tokenized patches of the driving environment for superior context modeling.
 
-## Quick Start
+### Core Components
 
-1. Recommended: create and activate a Python virtual environment (tested with Python 3.8+):
+* `full_pipeline.ipynb` demonstrates data loading, model instantiation, training loops, and qualitative results visualization for quick experimentation.
+* `models/` contains the modular PyTorch implementations of the architectures used in the benchmark.
+* `src/trainer.py` provides a reusable, highly configurable training loop that can be adapted to run experiments from the command line or scripts.
 
-	 python -m venv .venv
-	 .venv\Scripts\activate
+> **Note:** If you are running the project from scratch, please follow the specific L5Kit installation and dataset preparation steps outlined in `Project/LyftTrajectoryPrediction/README.md`.
 
-2. Install project requirements for the `LyftTrajectoryPrediction` project (if you plan to run it):
+---
 
-	 pip install -r Project/LyftTrajectoryPrediction/requirements.txt
+### Data Placement Notes
 
-3. Open the notebooks in Jupyter or VS Code and run cells interactively. Example:
-
-	 jupyter notebook
-
-4. Data placement notes:
-	 - Small datasets used by the homework (e.g., `HW0/cancer_dataset.csv`, `HW3/data/datasets/WikiText2`) are included in this repo.
-	 - The `Project/LyftTrajectoryPrediction/data/` folder is reserved for larger Lyft or L5Kit datasets and preprocessed files — these are not committed here. Place your downloaded datasets there and adjust paths in the notebooks or `src/utils.py` as needed.
-
-
+* **Homework Datasets:** Small datasets used in assignments (e.g., `HW0/cancer_dataset.csv` and `HW3/data/datasets/WikiText2`) are included directly in this repository.
+* **Project Datasets:** The `Project/LyftTrajectoryPrediction/data/` folder is reserved for the larger Lyft Level 5 datasets and preprocessed cache files. These large files are ignored by git. Place your downloaded datasets there and adjust the directory paths in the configuration YAML files or `src/utils.py` as needed.
