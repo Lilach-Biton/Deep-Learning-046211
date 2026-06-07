@@ -1,0 +1,3 @@
+[submodule "Project/LyftTrajectoryPrediction"]
+	path = Project/LyftTrajectoryPrediction
+	url = https://github.com/Lilach-Biton/LyftTrajectoryPrediction.git
